@@ -28,11 +28,29 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+      $categories = [
+        'Athletic',
+        'Music',
+        'Performance',
+        'Exhibit',
+        'Education',
+        'Food',
+        'Recreation',
+        'Career'
+      ];
+
         $currUser = User::where('id', Auth::id())->first();
         $school = School::where('id', $currUser->school_id)->first();
-        $events = Event::where('events.school_id', $currUser->school_id)->leftJoin('payments', 'events.id', '=', 'event_id')->where('events.eventLevel', '=', 'Free')->orWhere('payments.status', '=', 'Success')->future()->get(['events.id', 'events.eventLevel', 'events.eventName', 'events.eventLocation', 'events.school_id', 'events.organization', 'events.description', 'events.eventDate', 'events.eventStartTime', 'events.eventEndTime', 'events.eventSmallImage', 'events.category', 'events.locationLat', 'events.locationLng', 'events.address', 'events.eventLevel', 'events.eventLink', 'events.user_id']);
+        $events = Event::where('events.school_id', $currUser->school_id)->
+        leftJoin('payments', 'events.id', '=', 'event_id')->where('events.eventLevel', '=', 'Free')
+        ->orWhere('payments.status', '=', 'Success')->future()->get(['events.id', 'events.eventLevel',
+         'events.eventName', 'events.eventLocation', 'events.school_id', 'events.organization',
+          'events.description', 'events.eventDate', 'events.eventStartTime', 'events.eventEndTime',
+          'events.eventSmallImage', 'events.category', 'events.locationLat', 'events.locationLng',
+          'events.address', 'events.eventLevel', 'events.eventLink', 'events.user_id']);
         $featured = Event::where('events.school_id', $school->id)->leftJoin('payments', 'events.id', '=', 'event_id')->where('events.eventLevel', '=', 'Free')->orWhere('payments.status', '=', 'Success')->future()->feature()->get(['events.id', 'events.eventLevel', 'events.eventName', 'events.eventLocation', 'events.school_id', 'events.organization', 'events.description', 'events.eventDate', 'events.eventStartTime', 'events.eventEndTime', 'events.eventSmallImage', 'events.category', 'events.locationLat', 'events.locationLng', 'events.address', 'events.eventLevel', 'events.eventLink', 'events.user_id']);
-        return view('home', compact('school', 'events', 'featured'));
+        return view('home', compact('school', 'events', 'featured', 'categories'));
     }
 
     public function search(Request $request)
@@ -60,13 +78,22 @@ class HomeController extends Controller
 
 
       if ($category == 'All' ) {
-        $events = Event::where('events.school_id', $currUser->school_id)->where('events.eventDate', '>=', $startDate)->where('events.eventDate', '<=', $endDate)->where('events.eventStartTime', '<', $startTime)->future()->leftJoin('users', 'events.user_id', '=', 'users.id')->orderBy('events.eventDate', 'desc')->get();
+        $events = Event::where('events.school_id', $currUser->school_id)
+        ->leftJoin('payments', 'events.id', '=', 'event_id')->where('events.eventLevel', '=', 'Free')
+        ->orWhere('payments.status', '=', 'Success')
+        ->where('events.eventDate', '>=', $startDate)
+        ->where('events.eventDate', '<=', $endDate)->where('events.eventStartTime', '<', $startTime)
+        ->orderBy('events.eventDate', 'desc')
+        ->get(['events.id', 'events.eventLevel', 'events.eventName', 'events.eventLocation', 'events.school_id',
+        'events.organization', 'events.description', 'events.eventDate', 'events.eventStartTime', 'events.eventEndTime',
+        'events.eventSmallImage', 'events.category', 'events.locationLat', 'events.locationLng', 'events.address', 'events.eventLevel',
+        'events.eventLink', 'events.user_id']);
       } else {
-        $events = Event::where('events.school_id', $currUser->school_id)->where('events.category', $category)->where('events.eventDate', '>=', $startDate)->where('events.eventDate', '<=', $endDate)->where('events.eventStartTime', '<', $startTime)->leftJoin('users', 'events.user_id', '=', 'users.id')->orderBy('events.eventDate', 'desc')->get();
+        $events = Event::where('events.school_id', $currUser->school_id)->leftJoin('payments', 'events.id', '=', 'event_id')->where('events.eventLevel', '=', 'Free')->orWhere('payments.status', '=', 'Success')->where('events.eventDate', '>=', $startDate)->where('events.eventDate', '<=', $endDate)->where('events.category', $category)->where('events.eventStartTime', '<', $startTime)->leftJoin('users', 'events.user_id', '=', 'users.id')->orderBy('events.eventDate', 'desc')->get(['events.id', 'events.eventLevel', 'events.eventName', 'events.eventLocation', 'events.school_id', 'events.organization', 'events.description', 'events.eventDate', 'events.eventStartTime', 'events.eventEndTime', 'events.eventSmallImage', 'events.category', 'events.locationLat', 'events.locationLng', 'events.address', 'events.eventLevel', 'events.eventLink', 'events.user_id']);
       }
 
-      $featured = Event::where('events.school_id', $currUser->school_id)->feature()->where('events.eventDate', '>=', $startDate)->leftJoin('users', 'events.user_id', '=', 'users.id')->orderBy('events.eventDate', 'desc')->get();
+      return $events;
 
-      return view('home', compact('school', 'events', 'featured'));
+      return view('home', compact('school', 'events', 'featured', 'categories'));
     }
 }
