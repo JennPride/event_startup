@@ -9,9 +9,9 @@
           <div class="cover">
           </div>
           @if (Auth::user()->user_picture == '')
-          
+
           @else
-          <img src="img/user_icons/{{ Auth::user()->user_picture }}" alt="Team Image" class="avatar">
+          <img src="img/user_icons/{{ Auth::user()->user_picture }}" alt="Team Image" class="avatar" width=200 height=200>
           @endif
           <div class="title">
             <h3>{{ Auth::user()->name }}</h3>

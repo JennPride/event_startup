@@ -11,6 +11,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Image;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
@@ -35,9 +36,8 @@ class ProfileController extends Controller
         $school = School::where('id', $user->school_id)->first();
         $likes = Like::where('user_id', $user->id)->get();
         $attending = Attendee::where('user_id', $user->id)->get();
-        $events = Event::where('user_id', $user->id)->orderBy('eventDate', 'desc')->get();
 
-        return view('profile', compact('school', 'likes', 'attending', 'events'));
+        return view('profile', compact('school', 'likes', 'attending'));
 
     }
 
@@ -111,25 +111,34 @@ class ProfileController extends Controller
 
     public function edit(Request $data)
     {
+
       $user = User::where('id', Auth::id())->first();
+      $school = School::where('id', $user->school_id)->first();
 
       $today=date("Y-m-d");
-      $destinationPath = 'img/user_icons/';
+      $now = time();
+
+      if(is_null($data->file('user_image'))) {
+
+      } else {
       $user_image = $data->file('user_image');
       $extension = $user_image->getClientOriginalExtension();
-      $userName = $data->name;
-      $image = Image::make($user_image);
-      $image->resize(200,200);
-      $fileName = $userName.'_'.$today.'.'.$extension;
-      $img->save($destinationPath.$fileName);
-
-      $user->user_picture = $fileName;
+      $name = $user->name;
+      $fileName = $name.'_'.$now.'.'.$extension;
+      $destinationPath = 'img/user_icons/';
+      $upload_success = $user_image->move($destinationPath, $fileName);
+      if($upload_success) {
+        $user->user_picture = $fileName;
+      } else {
+        return 'Something went wrong...';
+      }
+      }
       $user->fName = $data->fName;
       $user->lName = $data->lName;
       $user->orgName = $data->orgName;
       $user->email = $data->email;
       if($user->accountType = "Organization") {
-        $user->category = $data->category;
+        $user->org_type = $data->category;
         $user->adminEmail = $data->adminEmail;
       }
       $user->city = $data->city;
@@ -138,6 +147,12 @@ class ProfileController extends Controller
       $user->newsletter = $data->newsletter;
       $user->save();
 
-      return view('profile');
+      $school = School::where('id', $user->school_id)->first();
+
+      return view('profile', compact('school'));
+    }
+
+    public function contact(Request $data) {
+      
     }
 }

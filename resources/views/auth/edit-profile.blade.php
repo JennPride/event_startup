@@ -11,7 +11,7 @@
             <h2>{{Auth::user()->name }}</h2>
           </div>
         </div>
-        <form class="form-horizontal" id="eventstartup-form" role="form" method="POST" action="edit-profile" enctype="multipart/form-data" >
+        <form class="form-horizontal" id="eventstartup-form" role="form" method="POST" action="submit-edit-profile" enctype="multipart/form-data" >
             {{ csrf_field() }}
           <input type="hidden" name="accountType" value="Personal">
           <input type="hidden" name="orgName" value="">
@@ -147,7 +147,7 @@
                   </label>
                 </br>
               </br>
-                  <img id="user_image" src="/img/user_icons/{{Auth::user()->user_image}}" alt="Icon Preview"  />
+                  <img id="user_image" src="img/user_icons/{{ Auth::user()->user_picture}}" alt="Icon Preview" width=200 height=200/>
                   </div>
                 </div>
             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">

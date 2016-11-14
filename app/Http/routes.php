@@ -140,7 +140,7 @@ Route::patch('{event}/submit-event-change', 'EventController@editEvent');
 Route::get('other-school', 'EventController@otherSchool');
 
 Route::get('edit-profile', 'ProfileController@showEditor');
-Route::post('edit-profile', 'ProfileController@edit');
+Route::post('submit-edit-profile', 'ProfileController@edit');
 
 
 Route::post('likeEvent', 'EventController@likeEvent');
@@ -150,3 +150,13 @@ Route::get('success', function() {
 });
 
 Route::get('events/{event}', 'EventController@showEventPage');
+
+Route::get('about', function() {
+  return view('about');
+});
+
+Route::get('contact', function() {
+  return view('contact');
+});
+
+Route::post('contact', 'ContactController@contact');

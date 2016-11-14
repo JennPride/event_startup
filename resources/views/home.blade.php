@@ -31,12 +31,11 @@
         <div class="col-lg-12">
           <div class="team text-center">
             <div class="cover" style="background:url('img/event_small/{{$f->eventSmallImage}}'); background-size:cover; height: 250px;">
-              <div class="overlay text-center">
-                <h3 class="white">{{$f->cost}}</h3>
-                <h5 class="light light-white"></h5>
-              </div>
             </div>
-            <img src="img/user_icons/{{$f->user_picture}}" alt="Team Image" class="avatar">
+            @if (is_null($f->user_picture) || ($f->user_picture == ""))
+            @else
+            <img src="img/user_icons/{{$f->user_picture}}" alt="Organization Image" class="avatar">
+            @endif
             <div class="title">
               <h3>{{$f->eventName}}</h3>
             <h5>hosted by {{$f->organization}} at {{$f->eventLocation}}</h5>
@@ -45,13 +44,11 @@
               <h5 class="muted regular">{{$f->category}}</h5>
               <p>{{$f->description}}</p>
             </div>
-            @if (is_null($f->eventLink) || ($f->eventLink == ''))
-            @else
-              @if ($f->eventLevel != 'Free')
+            @if ($f->eventLevel != 'Free')
               <a href="/events/{{$f->id}}"> <button class="btn btn-blue-fill">Learn More </button></a>
+            @elseif (is_null($f->eventLink) || ($f->eventLink == ''))
             @else
-              <a href="{{$f->eventLink}}"><button class="btn btn-blue-fill"> Learn More </button></a>
-              @endif
+            <a href="{{$f->eventLink}}"><button class="btn btn-blue-fill"> Learn More </button></a>
             @endif
             <!--
             <button class="btn btn-blue-fill" onclick=""><span id='like-btn'> Like </span> </button>
@@ -81,14 +78,9 @@
           <div class="col-md-7">
             <select name="category" class="form-control">
               <option value="All"> All </option>
-              <option value="Athletic"> Athletic </option>
-              <option value="Music"> Music </option>
-              <option value="Performance"> Performance </option>
-              <option value="Exhibit"> Exhibit </option>
-              <option value="Education"> Education </option>
-              <option value="Food"> Food </option>
-              <option value="Recreation"> Recreation </option>
-              <option value="Career"> Career </option>
+              @foreach ($categories as $c)
+              <option value="$c"> {{$c}} </option>
+              @endforeach
             </select>
           </div>
       </div>
