@@ -9,7 +9,7 @@
       <div class="team text-center" style="border-color: white;">
         <div class="cover" style="background-color: rgba(255, 255, 255, .9);">
           <div class="overlay text-center">
-            <h2>Login</h2>
+            <h2>Log in</h2>
           </div>
         </div>
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" id="eventstartup-form">
