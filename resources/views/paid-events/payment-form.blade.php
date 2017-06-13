@@ -9,17 +9,16 @@
 @section('content')
 <a href="{{ URL::previous() }}"> <button class="btn btn-white-fill" style="margin: 2%;"> Back </button> </a>
 
-<form class="form-horizontal" role="form" method="POST" action="submit-payment" id="eventstartup-form">
 		<div class="container">
 		  <div class="row">
-		    <div class="col-md-10 col-md-offset-1">
+		    <div class="col-md-12">
 		      <div class="team text-center">
 		        <div class="cover" style="background-color: rgba(255, 255, 255, .9);">
 		          <div class="overlay text-center">
 		            <h2>Event Details</h2>
 		          </div>
 		        </div>
-			                        {{ csrf_field() }}
+						<form class="form-horizontal" role="form" method="POST" action="submit-payment" id="eventstartup-form">
 															<label class="payment-description">  Thanks for choosing the {{ $event->eventLevel }} Level! Below you can customize the attributes for your
 																own personal event page. If you change your mind on anything - dont worry! You can
 																change all of the attributes through your event editor at any point. In addition to the
@@ -132,8 +131,7 @@
 														</div>
 													</div>
 												</div>
-											</div>
-											<div class="col-md-10 col-md-offset-1">
+											<div class="col-md-12">
 									      <div class="team text-center">
 									        <div class="cover" style="background-color: rgba(255, 255, 255, .9);">
 									          <div class="overlay text-center">
@@ -186,6 +184,7 @@
 			    </div>
 			</div>
 		</div>
+	</div>
 	      </form>
 @stop
 

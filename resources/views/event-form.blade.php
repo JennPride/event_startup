@@ -5,7 +5,7 @@
 <a href="home"> <button class="btn btn-white-fill" style="margin: 2%;"> Back </button> </a>
 <div class="container">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
       <div class="team text-center" style="border-color: white;">
         <div class="cover" style="background-color: rgba(255, 255, 255, .9);">
           <div class="overlay text-center">
@@ -13,7 +13,6 @@
           </div>
         </div>
 			                    <form class="form-horizontal" role="form" method="POST" action='/submit-event' id="eventstartup-form" enctype="multipart/form-data">
-			                        {{ csrf_field() }}
 															<input name="school_id" type="hidden" value="{{ Auth::user()->school_id }}">
 															<input name="organization" type="hidden" value="{{ Auth::user()->name}}">
 															<input name="user_id" type="hidden" value="{{ Auth::user()->id}}">
@@ -157,7 +156,6 @@
 																	</div>
 															</div>
 															<div class="form-group{{ $errors->has('eventLevel') ? ' has-error' : '' }}">
-
 																	<label class="col-md-3 control-label">Select Your Event Level Preference</label>
 																	<div class="col-md-7">
 																			<label><input id="eventLevel" type="radio"  name="eventLevel" value="Free"> Free Tier </label>
@@ -171,7 +169,6 @@
 																			<br>
 																			<br>
 																	</div>
-															</div>
 			                        <div class="form-group">
 			                            <div class="col-md-6 col-md-offset-3">
 			                                <button type="submit" class="btn btn-white-fill">
@@ -181,6 +178,7 @@
 			                        </div>
 			                    </form>
 			                </div>
+                    </div>
 			            </div>
 			        </div>
 			    </div>

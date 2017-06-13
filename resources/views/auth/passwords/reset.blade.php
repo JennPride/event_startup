@@ -1,14 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.forms')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
 
+<!-- Not sure what this page does quite yet - keep mixing it up with email.blade.php which is the password reset page -->
+
+<a href="/login"> <button class="btn btn-white-fill" style="margin: 2%;"> Back </button> </a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="team text-center" style="border-color: white;">
+        <div class="cover" style="background-color: rgba(255, 255, 255, .9);">
+          <div class="overlay text-center">
+                <h2>Reset Password</h2>
+              </div>
+            </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
+                    <form class="form-horizontal" role="form" action="{{ url('/login') }}" id="eventstartup-form">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="token" value="{{ $token }}">
