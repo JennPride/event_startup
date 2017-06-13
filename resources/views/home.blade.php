@@ -142,7 +142,10 @@
           <div class="cover" style="background:url('img/event_small/{{$f->eventSmallImage}}'); background-size:cover; height: 250px;
         	background-position: center;">
           </div>
-          <img src="img/user_icons/{{$f->user_picture}}" alt="Team Image" class="avatar">
+          @if (is_null($f->user_picture) || ($f->user_picture == ""))
+          @else
+          <img src="img/user_icons/{{$e->user_picture}}" alt="Organization Image" class="avatar">
+          @endif
           <div class="title">
             <h2 style="color: black;">{{$f->eventName}}</h2>
           <h3>hosted by <b>{{$f->organization}}</b> </h3>
