@@ -8,9 +8,8 @@
         <div class="team text-center" style="background-color: rgba(255, 255, 255, .6);">
           <div class="cover">
             </div>
-          <img src="img/user_icons/{{ Auth::user()->user_picture }}" alt="Team Image" class="avatar">
+          <img src="img/user_icons/{{ Auth::user()->user_picture }}" alt="Team Image" class="avatar" width="175">
           <div class="title">
-            <h3>{{ Auth::user()->name }}</h3>
           @if ((count($futureEvents) >= 1) || (count($pastEvents) >= 1))
             @if (count($futureEvents) >= 1)
                 <h2 style="font-size: 3em;"> Upcoming Events </h2>
