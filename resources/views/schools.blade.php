@@ -1,11 +1,9 @@
 @extends('layouts.forms')
 
-
 @section('content')
 <a href="/"> <button class="btn btn-white-fill" style="margin: 2%;"> Back </button> </a>
 <section class="section section-padded">
   <div class="container">
-
     <div class="row text-center title">
       <h2>Choose A School</h2>
     </div>
