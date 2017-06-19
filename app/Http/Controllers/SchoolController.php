@@ -35,13 +35,11 @@ class SchoolController extends Controller
     }
 
     public function suggest(Request $request) {
-
       $sugg = new Suggestion;
-
       $sugg->email = $request->email;
       $sugg->school = $request->school;
       $sugg->save();
-
-      return view('success');
+      $message = "";
+      return view('success', compact('message'));
     }
 }

@@ -35,7 +35,6 @@
   </div>
 </div>
   <div class="cut cut-bottom"></div>
-
 </section>
 
 @stop
