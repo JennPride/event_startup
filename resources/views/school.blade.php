@@ -71,6 +71,7 @@
     </div>
     </form>
   </div>
+    @if (count($events) >= 1
   <div class="team text-center" style="border-style: none">
   <div>
     <ul id="map-labels">
@@ -85,7 +86,6 @@
     </ul>
   </div>
 </div>
-  @if (count($events) >= 1)
   <div class="row">
       <div class="col-md-10 col-md-offset-1" id="map-container">
       <div id="map" class="center-block"></div>
