@@ -88,7 +88,12 @@
 	</nav>
     @yield('content')
 
-
+		<!-- Holder for mobile navigation -->
+		<div class="mobile-nav">
+			<ul>
+			</ul>
+			<a href="#" class="close-link"><i class="arrow_up"></i></a>
+		</div>
 		    <!-- JavaScripts -->
 				<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.min.css"></script>
 		    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>

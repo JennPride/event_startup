@@ -15,12 +15,9 @@ Route::get('/', function () {
     $schools = \App\School::all();
     return view('welcome', compact('schools'));
 });
-
-
 Route::get('/profile-choice', function () {
     return view('auth.profile-choice');
 });
-
 Route::get('/submit-event', 'EventController@showForm');
 Route::post('/submit-event', 'EventController@submitOrCharge');
 
