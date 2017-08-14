@@ -30,7 +30,7 @@ Route::get('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@
 Route::post('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@register']);
 
 Route::get('personal', function() {
-
+  // Figure out where to put this constant for universal use
         $states = ['ALABAMA',
         	'ALASKA',
         	'AMERICAN SAMOA',
@@ -90,7 +90,6 @@ Route::get('personal', function() {
         	'WEST VIRGINIA',
         	'WISCONSIN',
         	'WYOMING'];
-
   $schools = \App\School::all();
   return view('auth.personal', compact('schools', 'states'));
 });

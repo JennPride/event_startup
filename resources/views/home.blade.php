@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <header id="intro" style="background: url('../img/{{$school->id}}.jpg');">
   <div class="container">
     <div class="table">
@@ -17,7 +15,6 @@
     </div>
   </div>
 </header>
-
   @if (count($featured) >= 1)
   <section id="services" class="section section-padded">
     <div class="cut cut-top"></div>
