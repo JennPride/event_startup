@@ -40,8 +40,12 @@ class HomeController extends Controller
         'Career'
       ];
 
+      //Consider removing featured OR having all non featured events free to simplify logic?
+
         $currUser = User::where('id', Auth::id())->first();
         $school = School::where('id', $currUser->school_id)->first();
+
+        // Grab all events that are from the user's school, free or paid for, and are in the future
         $events = Event::where('events.school_id', $currUser->school_id)->
         leftJoin('payments', 'events.id', '=', 'event_id')->where('events.eventLevel', '=', 'Free')
         ->orWhere('payments.status', '=', 'Success')->future()->get(['events.id', 'events.eventLevel',
@@ -49,6 +53,8 @@ class HomeController extends Controller
           'events.description', 'events.eventDate', 'events.eventStartTime', 'events.eventEndTime',
           'events.eventSmallImage', 'events.category', 'events.locationLat', 'events.locationLng',
           'events.address', 'events.eventLevel', 'events.eventLink', 'events.user_id']);
+
+        // Grab all featured events which are paid for
         $featured = Event::where('events.school_id', $school->id)->leftJoin('payments', 'events.id', '=', 'event_id')->where('events.eventLevel', '=', 'Free')->orWhere('payments.status', '=', 'Success')->future()->feature()->get(['events.id', 'events.eventLevel', 'events.eventName', 'events.eventLocation', 'events.school_id', 'events.organization', 'events.description', 'events.eventDate', 'events.eventStartTime', 'events.eventEndTime', 'events.eventSmallImage', 'events.category', 'events.locationLat', 'events.locationLng', 'events.address', 'events.eventLevel', 'events.eventLink', 'events.user_id']);
         return view('home', compact('school', 'events', 'featured', 'categories'));
     }
