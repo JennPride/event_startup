@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\School;
 use App\User;
 use App\Event;
-use App\Like;
-use App\Attendee;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,10 +32,8 @@ class ProfileController extends Controller
     {
         $user = User::where('id', Auth::id())->first();
         $school = School::where('id', $user->school_id)->first();
-        $likes = Like::where('user_id', $user->id)->get();
-        $attending = Attendee::where('user_id', $user->id)->get();
 
-        return view('profile', compact('school', 'likes', 'attending'));
+        return view('profile', compact('school'));
 
     }
 
@@ -153,6 +149,6 @@ class ProfileController extends Controller
     }
 
     public function contact(Request $data) {
-      
+
     }
 }

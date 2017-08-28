@@ -1,8 +1,7 @@
 @extends('layouts.forms')
 
-
 @section('content')
-<a href="home"> <button class="btn btn-white-fill" style="margin: 2%;"> Back </button> </a>
+<a href="home"> <button class="btn btn-white-fill" style="margin: 2%;"> Back </button></a>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -20,7 +19,7 @@
               <div class="form-group{{ $errors->has('eventName') ? ' has-error' : '' }}">
                   <label for="eventName" class="col-md-3 control-label">Event Name</label>
                   <div class="col-md-7">
-                      <input id="eventName" type="text" class="form-control" name="eventName" value="{{ old('eventName') }}" required=true>
+                      <input id="eventName" type="text" class="form-control" name="eventName" value="{{ old('eventName') }}" required=true >
                       @if ($errors->has('eventName'))
                           <span class="help-block">
                               <strong>{{ $errors->first('eventName') }}</strong>
@@ -45,10 +44,8 @@
 							</div>
               <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                   <label for="description" class="col-md-3 control-label">Event Description</label>
-
                   <div class="col-md-7">
                       <textarea id="description" class="form-control" name="description" value="{{ old('description') }}" required=true></textarea>
-
                       @if ($errors->has('description'))
                           <span class="help-block">
                               <strong>{{ $errors->first('description') }}</strong>
@@ -58,7 +55,6 @@
               </div>
 							<div class="form-group{{ $errors->has('eventLocation') ? ' has-error' : '' }}">
 									<label for="eventLocation" class="col-md-3 control-label">Event Location Name</label>
-
 									<div class="col-md-7">
 											<input id="eventLocation" type="text" class="form-control" name="eventLocation" value="{{ old('eventLocation') }}" required=true>
 											@if ($errors->has('eventLocation'))
@@ -134,7 +130,6 @@
 									</br>
 								</br>
 										<img id="eventSmallImage" src="#" alt="Icon Preview"  />
-
 											@if ($errors->has('eventSmallImage'))
 													<span class="help-block">
 															<strong>{{ $errors->first('eventSmallImage') }}</strong>
@@ -157,12 +152,14 @@
 									<label class="col-md-3 control-label">Select Your Event Level Preference</label>
 									<div class="col-md-7">
 											<label><input id="eventLevel" type="radio"  name="eventLevel" value="Free"> Free Tier </label>
-											includes a listing of all event information on the main events page for your school.
+											includes a listing of all event information on the main events page for your school. Others can find your
+                      event by searching through the main events page, and your event will show up on the front page up to 10
+                      days before the start date.
 											<br>
 											<br>
 											<label>	<input id="eventLevel" type="radio" name="eventLevel" value="Silver" > Silver Tier ($10)</label>
-											includes everything from the Free Tier in addition to your own events page on our website, which you can customize
-											how you like!
+											includes everything from Silver Tier in addition to 20 additional days on the front page for your School, an entire
+                      month on our Featured Events list, and marketing on Event Eye's social media accounts!"
 											<br>
 											<br>
 											<br>
