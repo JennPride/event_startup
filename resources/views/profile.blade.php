@@ -7,12 +7,9 @@
       <div class="col-lg-12">
         <div class="team text-center" style="background-color: white;">
           <div class="cover">
-          </div>
-          @if (Auth::user()->user_picture == '')
-
-          @else
-          <img src="img/user_icons/{{ Auth::user()->user_picture }}" alt="Team Image" class="avatar" width=200 height=200>
-          @endif
+            @if (Auth::user()->user_picture != '')
+            <img src="img/user_icons/{{ Auth::user()->user_picture }}" alt="Team Image" class="avatar" width="175">
+            @endif
           <div class="title">
             <h3>{{ Auth::user()->name }}</h3>
             @if (Auth::user()->accountType == 'Personal')

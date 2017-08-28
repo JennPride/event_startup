@@ -139,7 +139,6 @@
             </div>
             @endif
             <div class="form-group{{ $errors->has('user_image') ? ' has-error' : '' }}">
-
               <label for="user_image" class="col-md-3 control-label">User Picture </label>
                 <div class="col-md-7">
                   <label class="btn btn-default btn-white-fill">

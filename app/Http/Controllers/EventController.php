@@ -29,6 +29,10 @@ class EventController extends Controller
 
   public function submitOrCharge(Request $data) {
 
+        $this->validate($data, [
+          'event_small' => 'max:1000',
+        ]);
+
         $event = new Event;
         $event_small= $data->file('eventSmallImage');
         $extension = $event_small->getClientOriginalExtension();
@@ -154,6 +158,7 @@ class EventController extends Controller
   public function viewEditor(Event $event)
   {
     $payment = Payment::where('event_id', $event->id)->orderBy('created_at', 'desc')->first();
+
     return view('events-editor', compact('event', 'payment'));
 
   }
@@ -161,6 +166,7 @@ class EventController extends Controller
   public function editEvent(Request $request, Event $event)
   {
     $event->update($request->all());
+
 
      if (empty($event->upgradeLevel)) {
        return view('success')->with('event', $event);
