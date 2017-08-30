@@ -33,8 +33,8 @@
                           @else
                           <p><b>Cost: </b>{{$f->cost}}</p>
                           @endif
-                          <a href="/{{ $f -> id }}/edit-event"><button class="btn btn-blue-fill"> Edit Event</button></a>
                         </div>
+                        <a href="/{{ $f -> id }}/edit-event"><button class="btn btn-blue-fill"> Edit Event</button></a>
                       </div>
                       </div>
                       @endforeach

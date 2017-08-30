@@ -158,7 +158,6 @@ class EventController extends Controller
   public function viewEditor(Event $event)
   {
     $payment = Payment::where('event_id', $event->id)->orderBy('created_at', 'desc')->first();
-
     return view('events-editor', compact('event', 'payment'));
 
   }
@@ -166,10 +165,36 @@ class EventController extends Controller
   public function editEvent(Request $request, Event $event)
   {
     $event->update($request->all());
+    $address = str_replace(" ", "+", $request->address);
+    $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
 
 
-     if (empty($event->upgradeLevel)) {
-       return view('success')->with('event', $event);
+    $response = file_get_contents($url);
+
+    $json = json_decode($response,TRUE); //generate array object from the response from the web
+
+    $event->locationLat = $json['results'][0]['geometry']['location']['lat'];
+    $event->locationLng = $json['results'][0]['geometry']['location']['lng'];
+
+    if(is_null($request->file('event_image'))) {
+    } else {
+      $event_image = $request->file('user_image');
+      $extension = $event_image->getClientOriginalExtension();
+      $name = $event->eventName;
+      $fileName = $name.'_'.$now.'.'.$extension;
+      $destinationPath = 'img/event_small/';
+      $upload_success = $event_image->move($destinationPath, $fileName);
+      if($upload_success) {
+        $event->eventSmallImage = $fileName;
+      } else {
+        return 'Something went wrong...';
+      }
+    }
+
+    $event->save();
+    $message = "Your edits were successfully applied";
+     if (empty($event->upgrade)) {
+       return view('success')->with('message', $message);
      } else {
         return view('paid-events.upgrade-form')->with('event', $event);
   }
