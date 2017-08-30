@@ -77,7 +77,7 @@
             <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
   							<label for="category" class="col-md-3 control-label">Category</label>
   							<div class="col-md-7">
-  								<select name="category" class="form-control">
+  								<select name="category" class="form-control" value="{{Auth::user()->org_type}}" select="{{Auth::user()->org_type}}">
   									<option value="Academic"> Academic </option>
   									<option value="Advocacy"> Advocacy </option>
   									<option value="Service"> Service </option>
@@ -142,13 +142,13 @@
               <label for="user_image" class="col-md-3 control-label">User Picture </label>
                 <div class="col-md-7">
                   <label class="btn btn-default btn-white-fill">
-                      Browse <input type="file" onchange="readURL(this);" style="display: none;" name='user_image' required=true>
+                      Browse <input type="file" onchange="readURL(this);" style="display: none;" name='user_image'>
                   </label>
                 </br>
               </br>
                   <img id="user_image" src="img/user_icons/{{ Auth::user()->user_picture}}" alt="Icon Preview" width=200 height=200/>
                   </div>
-                </div>
+            </div>
             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                 <label for="city" class="col-md-3 control-label">City</label>
 

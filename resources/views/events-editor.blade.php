@@ -17,7 +17,7 @@
 															<input name="school_id" type="hidden" value="{{ Auth::user()->school_id }}">
 															<input name="organization" type="hidden" value="{{ Auth::user()->name}}">
                               <input name="id" type="hidden" value="{{ $event->id }}">
-															  <input name="user_id" type="hidden" value="{{ Auth::user()->id}}">
+															<input name="user_id" type="hidden" value="{{ Auth::user()->id}}">
 			                        <div class="form-group{{ $errors->has('eventName') ? ' has-error' : '' }}">
 			                            <label for="eventName" class="col-md-3 control-label">Event Name</label>
 			                            <div class="col-md-7">
@@ -32,7 +32,8 @@
 															<div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
 																	<label for="category" class="col-md-3 control-label">Event Category</label>
 																	<div class="col-md-7">
-																			<select id="category" type="text" class="form-control" name="category" value="{{$event->category}}" >
+																			<select id="category" type="text" class="form-control" name="category">
+																				<option value="{{$event->category}}" selected="selected">{{$event->category}}</option>
 																				<option value="Athletic">Athletic</option>
 																				<option value="Music">Music</option>
 																				<option value="Performance">Performance</option>
@@ -56,23 +57,12 @@
 			                            </div>
 			                        </div>
 															<div class="form-group{{ $errors->has('eventLocation') ? ' has-error' : '' }}">
-																	<label for="eventLocation" class="col-md-3 control-label">Event Location Name</label>
+																	<label for="eventLocation" class="col-md-3 control-label">Location Name</label>
 																	<div class="col-md-7">
 																			<input id="eventLocation" type="text" class="form-control" name="eventLocation" value="{{ $event->eventLocation}}">
 																			@if ($errors->has('eventLocation'))
 																					<span class="help-block">
 																							<strong>{{ $errors->first('eventLocation') }}</strong>
-																					</span>
-																			@endif
-																	</div>
-															</div>
-															<div class="form-group{{ $errors->has('room') ? ' has-error' : '' }}">
-																	<label for="room" class="col-md-3 control-label">Event Room (if applicable)</label>
-																	<div class="col-md-7">
-																			<input id="room" type="text" class="form-control" name="room" value="{{ $event->room }}">
-																			@if ($errors->has('room'))
-																					<span class="help-block">
-																							<strong>{{ $errors->first('room') }}</strong>
 																					</span>
 																			@endif
 																	</div>
@@ -126,11 +116,11 @@
 																	<label for="eventSmallImage" class="col-md-3 control-label">Event Cover Image</label>
 																	<div class="col-md-7">
 																		<label class="btn btn-default btn-white-fill">
-																				Browse <input type="file" onchange="readURL(this);" style="display: none;" name='event_image' required=true>
+																				Browse <input type="file" onchange="readURL(this);" style="display: none;" name='event_image'>
 																		</label>
 																	</br>
 																</br>
-																		<img id="event_image" src=".../img/event_small/Farmers Market_2017-08-23_18563.jpg" alt="Icon Preview" width=500 height=165/>
+																		<img id="event_image" src="/img/event_small/{{$event->eventSmallImage}}" alt="Cover Photo Preview" width=500 height=165/>
 																		</div>
 															</div>
 															<div class="form-group{{ $errors->has('eventLink') ? ' has-error' : '' }}">
@@ -144,25 +134,35 @@
 																			@endif
 																	</div>
 															</div>
+															<div class="form-group{{ $errors->has('eventLevel') ? ' has-error' : '' }}">
                                   <label for="eventLevel" class="col-md-3 control-label">Current Event Level</label>
                                   <div class="col-md-7">
-																		<input id="evenLevel" type="text" class="form-control" name="eventLevel" value="{{ $event->eventLevel }}" disabled="true">
+																		<input id="eventLevel" type="text" class="form-control" name="eventLevel" value="{{ $event->eventLevel }}" disabled="true">
                                   </div>
-															<div class="form-group{{ $errors->has('eventLevel') ? ' has-error' : '' }}">
-																	<label class="col-md-3 control-label">Interested in an Upgrade?</label>
-																	<div class="col-md-7">
-                                  @if ($event->eventLevel == "Free")
-																			<input id="upgradeLevel" type="radio" name="upgradeLevel" value="Silver" > Yes
-																			<br>
-                                  @endif
+																</div>
+																<br>
+																@if ($event->eventLevel == "Free")
+																<div class="cover" style="background-color: rgba(255, 255, 255, .9);">
+																</div>
+																<div class="overlay text-center">
+																<h2 style="color: white;"> Upgrade {{$event->eventName}}?</h2>
+																<p style="color: white;">We'll
+																post your event on your School's front page for an extra 20 days, market your
+																event on our social media accounts, and feature your event at the top for an entire month! All
+															  for just $10.</p>
 															</div>
-															<div class="form-group">
-									    						<div class="col-md-6 text-center">
-									    								<button type="submit" class="btn btn-white-fill">
-									    										<i class="fa fa-btn fa-user"></i> Submit Edits
-									    								</button>
-									    						</div>
-									    				</div>
+																<div class="form-group" >
+																  <div class="col-lg-7">
+																		<label class="form-check-label" style="text-align: center;">
+																		<input id="upgradeLevel" type="checkbox" name="upgradeLevel" value="Silver">
+      															Upgrade to Silver Level for $10!
+    																</label>
+																  </div>
+																</div>
+																@endif
+						    								<button type="submit" class="btn btn-white-fill">
+						    										Submit Edits
+						    								</button>
 			                    </form>
 			                </div>
 			            </div>
