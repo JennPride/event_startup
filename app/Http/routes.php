@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     $schools = \App\School::all();
-    return view('welcome', compact('schools'));
+    return view('welcome');
 });
 Route::get('/profile-choice', function () {
     return view('auth.profile-choice');

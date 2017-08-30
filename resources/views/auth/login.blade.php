@@ -1,14 +1,6 @@
-@extends('layouts.forms')
+@extends('layouts.forms', ['back' => "/"])
 
 @section('content')
-
-<a href="/"> <button class="btn btn-white-fill" style="margin: 2%;"> Back </button> </a>
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="team text-center" style="border-color: white;">
-        <div class="cover" style="background-color: rgba(255, 255, 255, .9);">
-          <div class="overlay text-center">
             <h2>Log in</h2>
           </div>
         </div>
@@ -28,7 +20,6 @@
                     @endif
                 </div>
             </div>
-
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                 <label for="password" class="col-md-3 control-label">Password</label>
 
@@ -42,8 +33,6 @@
                     @endif
                 </div>
             </div>
-
-
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-3">
                     <div class="checkbox">
@@ -53,7 +42,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-sm-offset text-center">
                     <button type="submit" class="btn btn-white-fill">
@@ -65,9 +53,5 @@
                 </div>
             </div>
         </form>
-      </div>
-    </div>
-  </div>
-</div>
 
 @stop
