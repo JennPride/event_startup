@@ -65,12 +65,13 @@
                   </div>
                   </div>
                 @endforeach
+                <button class="btn btn-blue-fill" onclick="topFunction()" id="top" title="Go to top">Back to Top</button>
               @endif
+             -->
             @else
             <h3> Awe, you haven't submitted any events! </h3>
-          @endif -->
+          @endif
         </div>
-        <button class="btn btn-blue-fill" onclick="topFunction()" id="top" title="Go to top">Back to Top</button>
       </div>
         </div>
         </div>
