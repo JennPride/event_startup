@@ -52,12 +52,6 @@
               <a href="{{$f->eventLink}}"><button class="btn btn-blue-fill"> Learn More </button></a>
               @endif
             @endif
-            <!--
-            <button class="btn btn-blue-fill" onclick=""><span id='like-btn'> Like </span> </button>
-            <button class="btn btn-blue-fill" onclick=""><span id='attend-btn'> Attend </span>  </button>
-            <br>
-            <div class="likes-and-attends">
-            <p>{{$f->likeCount}} likes {{$f->attendingCount}} attending </p>-->
           </div>
           </div>
         </div>
@@ -170,13 +164,6 @@
             <a href="{{$f->eventLink}}"><button class="btn btn-blue-fill"> Learn More </button></a>
             @endif
           @endif
-          <button class="btn btn-blue-fill" ><span id='like-btn'> Like </span> </button>
-        </form>
-          <button class="btn btn-blue-fill" onclick=""><span id='attend-btn'> Attend </span>  </button>
-          <br>
-          <div class="likes-and-attends">
-          <p>{{$f->likeCount}} likes {{$f->attendingCount}} attending </p>
-        </div>
         </div>
       </div>
       @endforeach
